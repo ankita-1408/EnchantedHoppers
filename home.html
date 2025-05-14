@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farewell 2025 Invitation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 2s ease-in-out;
+      position: relative;
+      background: url("C:/Users/Saish/OneDrive/Desktop/Fareweel/login background.jpg") center center no-repeat;
+      background-size: cover;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d, 0 0 15px #ff4d4d; }
+      50% { text-shadow: 0 0 15px #ff1a1a, 0 0 25px #ff1a1a, 0 0 30px #ff1a1a; }
+      100% { text-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d, 0 0 15px #ff4d4d; }
+    }
+
+    #login-section, #invitation-section, #chosen-section, #question-section {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      transition: all 0.5s ease-in-out;
+      z-index: 1;
+      backdrop-filter: blur(8px);
+    }
+
+    #login-section.active, #invitation-section.active, #chosen-section.active, #question-section.active {
+      display: flex;
+    }
+
+    input[type="password"], input[type="text"], select {
+      padding: 12px 20px;
+      font-size: 16px;
+      border: 2px solid #ced4da;
+      border-radius: 10px;
+      margin-top: 15px;
+      width: 100%;
+      max-width: 300px;
+      background: rgba(255,255,255,0.8);
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 30px;
+      background: linear-gradient(to right, #1f4037, #99f2c8);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #dddddd;
+    }
+
+    #riddle-message {
+      font-size: 1.1rem;
+      color: #ffffff;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    video {
+      margin-top: 30px;
+      max-width: 90vw;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    #timer {
+      font-size: 1.2rem;
+      color: #ffcc00;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    #countdown {
+      font-size: 2rem;
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    body.enchanted {
+      background: url('enchanted_forest.jpg') center center no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+
+    #question-section {
+      font-family: 'Playfair Display', serif;
+      color: white;
+    }
+
+    #chosen-section h1 {
+      animation: glow 2s infinite ease-in-out;
+    }
+
+    #loading-container {
+      width: 300px;
+      height: 20px;
+      background-color: #444;
+      border-radius: 10px;
+      margin-top: 30px;
+      overflow: hidden;
+    }
+
+    #loading-bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(to right, #ff4d4d, #ff1a1a);
+      animation: fillBar 4s forwards;
+    }
+
+    @keyframes fillBar {
+      to {
+        width: 100%;
+      }
+    }
+
+    /* Fireflies */
+    .firefly {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: radial-gradient(circle, #ffffaa 0%, #ffaa00 40%, transparent 70%);
+      border-radius: 50%;
+      opacity: 0;
+      animation: fly 20s linear infinite, blink 4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes fly {
+      0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+      50% { transform: translate(20px, -30px) scale(1.2); opacity: 1; }
+      100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.9; }
+    }
+
+  </style>
+</head>
+<body>
+  <div id="login-section" class="active">
+    <h1><strong>Solve the Forest Riddle</strong></h1>
+    <p>"I have roots nobody sees, I am taller than the trees. What am I?"</p>
+    <!-- Added name input -->
+    <input type="text" id="name-input" placeholder="Enter your name..." />
+    <input type="password" id="password-input" placeholder="Your answer..." />
+    <button onclick="checkPassword()">Submit</button>
+    <div id="riddle-message"></div>
+  </div>
+
+  <div id="invitation-section">
+    <h1>You are invited to Farewell 2025 🎉</h1>
+    <button onclick="goToNextPage()">Go to Invitation</button>
+  </div>
+
+  <div id="chosen-section">
+    <h1><strong>You've been chosen to walk the cursed forest trail...</strong></h1>
+    <div id="loading-container">
+      <div id="loading-bar"></div>
+    </div>
+  </div>
+
+  <div id="question-section">
+    <h1>New Question:</h1>
+    <p>"What time is it when the clock strikes midnight?"</p>
+    <input type="password" id="time-answer" placeholder="Your answer..." />
+    <button onclick="checkTimeAnswer()">Submit Answer</button>
+    <div id="timer">
+      <span id="countdown"></span>
+    </div>
+  </div>
+
+  <div id="visuals-section" style="display: none;">
+    <button onclick="showVideo()">Watch Visuals</button>
+    <video id="farewell-video" controls style="display:none;">
+      <source src="your_video_url_here.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Ambient Forest Sound -->
+  <audio autoplay loop hidden>
+    <source src="your_forest_ambience.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const validNames = ["Aniket", "Akanksha", "Vaishnavi", "Ayush", "Vishwajit", "Sanika", "Avishka"];
+    const correctAnswer = "1";
+    const correctTimeAnswer = "2";
+
+    function checkPassword() {
+      const name = document.getElementById('name-input').value.trim().toLowerCase(); // Convert input to lowercase
+      const input = document.getElementById('password-input').value.trim().toLowerCase(); // Convert riddle answer to lowercase
+
+      // Check if name (lowercase) is in the valid names list (also converted to lowercase)
+      if (validNames.map(n => n.toLowerCase()).includes(name) && input === correctAnswer) {
+        setTimeout(() => {
+          document.getElementById('login-section').classList.remove('active');
+          document.getElementById('chosen-section').classList.add('active');
+          setTimeout(() => {
+            document.body.classList.add('enchanted');
+            document.getElementById('question-section').classList.add('active');
+          }, 4000); // This delay matches the loading bar animation
+        }, 1500);
+      } else {
+        // If name is not authorized or answer is wrong
+        document.getElementById('riddle-message').textContent = "Not authorized or wrong answer. Try again adventurer.";
+        document.getElementById('name-input').value = '';
+        document.getElementById('password-input').value = '';
+      }
+    }
+
+    function goToNextPage() {
+      document.body.classList.add('enchanted');
+      document.getElementById('chosen-section').classList.remove('active');
+      document.getElementById('question-section').classList.add('active');
+    }
+
+    function checkTimeAnswer() {
+      const input = document.getElementById('time-answer').value.trim().toLowerCase();
+      if (input === correctTimeAnswer) {
+        startTimer();
+      } else {
+        alert("Wrong answer! Try again.");
+      }
+    }
+
+    function startTimer() {
+      let timeLeft = 10;
+      localStorage.setItem('startTime', Date.now());
+
+      function updateTimer() {
+        const startTime = localStorage.getItem('startTime');
+        const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+        timeLeft = Math.max(10 - elapsedTime, 0);
+        document.getElementById('countdown').textContent = timeLeft + " seconds left";
+
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          document.getElementById('visuals-section').style.display = 'block';
+        }
+      }
+
+      const timerInterval = setInterval(updateTimer, 1000);
+      updateTimer();
+    }
+
+    function showVideo() {
+      const video = document.getElementById('farewell-video');
+      video.style.display = 'block';
+      video.play();
+    }
+
+    // Clear page and show the final message after loading bar is complete
+    document.getElementById('loading-bar').addEventListener('animationend', function() {
+      document.body.innerHTML = '<h1>Adventurers, here\'s something for you!</h1>';
+    });
+  </script>
+</body>
+</html>

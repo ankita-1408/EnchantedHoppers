@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Farewell 2025 Invitation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: url("login-background.jpg") center center no-repeat;
+      background-size: cover;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #login-section, #loading-section, #final-section {
+      background-color: rgba(0,0,0,0.8);
+      padding: 40px;
+      border-radius: 16px;
+      text-align: center;
+      color: white;
+      backdrop-filter: blur(8px);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+    }
+
+    input {
+      width: 250px;
+    }
+
+    button {
+      background: linear-gradient(to right, #1f4037, #99f2c8);
+      color: white;
+      cursor: pointer;
+    }
+
+    #loading-container {
+      width: 300px;
+      height: 20px;
+      background-color: #444;
+      border-radius: 10px;
+      margin: 20px auto;
+      overflow: hidden;
+    }
+
+    #loading-bar {
+      height: 100%;
+      background: linear-gradient(to right, #ff4d4d, #ff1a1a);
+      width: 0%;
+      animation: fillBar 4s forwards;
+    }
+
+    @keyframes fillBar {
+      to {
+        width: 100%;
+      }
+    }
+
+    #countdown {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      color: #ffcc00;
+    }
+
+    video {
+      margin-top: 20px;
+      width: 80%;
+      border-radius: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="login-section">
+    <h1>Solve the Forest Riddle</h1>
+    <p>Enter your name and secret code to proceed.</p>
+    <input type="text" id="name-input" placeholder="Enter your name" /><br/>
+    <input type="password" id="riddle-input" placeholder="Enter your code..." /><br/>
+    <button onclick="checkLogin()">Submit</button>
+    <div id="login-message" style="margin-top: 10px;"></div>
+  </div>
+
+  <div id="loading-section" class="hidden">
+    <h1>You've been chosen to walk the cursed forest trail...</h1>
+    <div id="loading-container">
+      <div id="loading-bar"></div>
+    </div>
+  </div>
+
+  <div id="final-section" class="hidden">
+    <h1 id="final-title">Adventurers, here's something for you!</h1>
+    <div id="countdown"></div>
+    <button id="watch-btn" class="hidden" onclick="showVideo()">Watch the Visuals</button>
+    <video id="farewell-video" controls>
+      <source src="your_video_url_here.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <script>
+    const userCredentials = {
+      "aniket": "rbt21cb057",
+      "akanksha": "rbt21ar051",
+      "ayush": "rbt21et028",
+      "avishka": "rbt21cb067",
+      "sanika": "rbt21cb035",
+      "vishwajit": "rbt21et035",
+      "vaishnavi": "rbt21it097"
+    };
+
+    const countdownDuration = 5 * 1000; // 5 seconds for testing
+
+    function checkLogin() {
+      const name = document.getElementById("name-input").value.trim().toLowerCase();
+      const answer = document.getElementById("riddle-input").value.trim().toLowerCase();
+      const message = document.getElementById("login-message");
+
+      if (!(name in userCredentials) || userCredentials[name] !== answer) {
+        message.textContent = "Not authorized. Try again adventurer.";
+        return;
+      }
+
+      // Passed checks
+      document.getElementById("login-section").classList.add("hidden");
+      document.getElementById("loading-section").classList.remove("hidden");
+
+      setTimeout(() => {
+        document.getElementById("loading-section").classList.add("hidden");
+        document.getElementById("final-section").classList.remove("hidden");
+        initializeCountdown();
+      }, 4000);
+    }
+
+    function initializeCountdown() {
+      const countdownDisplay = document.getElementById("countdown");
+      const watchBtn = document.getElementById("watch-btn");
+
+      let endTime = localStorage.getItem("farewellCountdownEnd");
+      if (!endTime) {
+        endTime = Date.now() + countdownDuration;
+        localStorage.setItem("farewellCountdownEnd", endTime);
+      } else {
+        endTime = parseInt(endTime);
+      }
+
+      function updateCountdown() {
+        const now = Date.now();
+        let diff = endTime - now;
+
+        if (diff <= 0) {
+          countdownDisplay.textContent = "The Wait is over:";
+          watchBtn.classList.remove("hidden");
+          clearInterval(timer);
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        diff %= (1000 * 60 * 60 * 24);
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        diff %= (1000 * 60 * 60);
+        const minutes = Math.floor(diff / (1000 * 60));
+        diff %= (1000 * 60);
+        const seconds = Math.floor(diff / 1000);
+
+        countdownDisplay.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
+
+      updateCountdown();
+      const timer = setInterval(updateCountdown, 1000);
+    }
+
+    function showVideo() {
+      const video = document.getElementById("farewell-video");
+      video.style.display = "block";
+      video.play();
+    }
+  </script>
+</body>
+</html>
