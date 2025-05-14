@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Clock Ticks...</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('saish.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .clock {
+      font-size: 3rem;
+      color: #ff4d4d;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 30px 60px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #ff1a1a;
+      animation: glow 1.5s infinite ease-in-out;
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        text-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d;
+      }
+      50% {
+        text-shadow: 0 0 20px #ff1a1a, 0 0 30px #ff1a1a;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="clock" id="clock">00:00:00</div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock(); // Initial call
+  </script>
+</body>
+</html>
