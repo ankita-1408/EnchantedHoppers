@@ -45,14 +45,9 @@ document.addEventListener("DOMContentLoaded", function () {
       section.classList.remove('active');
     }
   }
-
-  function goToExplore() {
-    window.location.href = "explore.html";  // Redirect to explore.html
-  }
-
+function goToExplore() {
+  window.location.href = "explore.html";
+}
   // Bind the checkPassword function to the button click event
   document.querySelector("button").addEventListener("click", checkPassword);
-  
-  // Attach the goToExplore function to the "Don't Click" button
-  document.getElementById("explore-btn").addEventListener("click", goToExplore);
 });
