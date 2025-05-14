@@ -45,7 +45,9 @@ document.addEventListener("DOMContentLoaded", function () {
       section.classList.remove('active');
     }
   }
-
+function goToExplore() {
+  window.location.href = "explore.html";
+}
   // Bind the checkPassword function to the button click event
   document.querySelector("button").addEventListener("click", checkPassword);
 });
