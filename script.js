@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function changeBackgroundImage() {
-    document.body.style.backgroundImage = "url('hh logo.jpg')";
+    document.body.style.backgroundImage = "url('second background.avif')";
     document.body.style.backgroundSize = "cover";  // Ensure the background covers the screen
     document.body.style.backgroundPosition = "center center";  // Center the background
   }
