@@ -35,9 +35,9 @@
       100% { text-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d; }
     }
     .glow-red {
-  color: red;
-  text-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px darkred;
-}
+      color: red;
+      text-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px darkred;
+    }
     .section {
       display: none;
       flex-direction: column;
@@ -81,24 +81,23 @@
       transition: transform 0.3s ease;
     }
 
-    a{
-  display: inline-block; /* Make anchor behave like a button */
-  text-decoration: none; /* Remove underline from anchor */
-  margin-top: 20px;
-  padding: 12px 30px;
-  background: linear-gradient(to right, #1f4037, #99f2c8);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
+    a {
+      display: inline-block;
+      text-decoration: none;
+      margin-top: 20px;
+      padding: 12px 30px;
+      background: linear-gradient(to right, #1f4037, #99f2c8);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
 
-a:hover{
-  transform: scale(1.05);
-}
-
+    a:hover {
+      transform: scale(1.05);
+    }
 
     button:hover {
       transform: scale(1.05);
@@ -123,12 +122,44 @@ a:hover{
       font-weight: bold;
     }
 
-    video {
+    /* Video container for fullscreen toggle */
+    #video-container {
+      position: relative;
+      width: 640px;
+      max-width: 90vw;
       margin-top: 30px;
-      max-width: 100%;
-      height: 50vh;
       border-radius: 16px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 480px;
+      border: none;
+      border-radius: 16px;
+      display: block;
+    }
+
+    /* Fullscreen toggle button */
+    #fullscreenBtn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: linear-gradient(to right, #1f4037, #99f2c8);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 12px;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 0 8px #1f4037;
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
+
+    #fullscreenBtn:hover {
+      transform: scale(1.05);
     }
 
     #loading-container {
@@ -164,7 +195,7 @@ a:hover{
         max-width: 90%;
       }
 
-      video {
+      #video-container iframe {
         height: 40vh;
       }
     }
@@ -177,39 +208,35 @@ a:hover{
     }
 
     #explore-btn {
-  margin-top: 20px;
-  padding: 12px 30px;
-  background: #ff1a1a !important; /* Ensures red overrides previous styles */
-  color: white !important;         /* Ensures white text */
-  border: none;
-  border-radius: 12px;
-  font-size: 18px;
-  cursor: pointer;
-  animation: redGlow 1.5s infinite alternate;
-  box-shadow: 0 0 8px #ff1a1a;
-  transition: transform 0.3s ease;
-}
+      margin-top: 20px;
+      padding: 12px 30px;
+      background: #ff1a1a !important;
+      color: white !important;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      cursor: pointer;
+      animation: redGlow 1.5s infinite alternate;
+      box-shadow: 0 0 8px #ff1a1a;
+      transition: transform 0.3s ease;
+    }
 
+    #explore-btn:hover {
+      transform: scale(1.05);
+      background: #e60000;
+    }
 
-#explore-btn:hover {
-  transform: scale(1.05);
-  background: #e60000; /* Slightly darker red for hover */
-}
-
-
-@keyframes redGlow {
-  0% {
-    box-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d;
-  }
-  50% {
-    box-shadow: 0 0 15px #ff1a1a, 0 0 25px #ff1a1a;
-  }
-  100% {
-    box-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d;
-  }
-}
-
-
+    @keyframes redGlow {
+      0% {
+        box-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d;
+      }
+      50% {
+        box-shadow: 0 0 15px #ff1a1a, 0 0 25px #ff1a1a;
+      }
+      100% {
+        box-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d;
+      }
+    }
   </style>
 </head>
 <body>
@@ -240,22 +267,43 @@ a:hover{
   </div>
 
   <div id="farewell-section" class="section">
-  <h1>Before You Start...</h1>
+    <h1>Before You Start...</h1>
 
-  <iframe 
-    src="https://drive.google.com/file/d/1MwgZCSqnh3bf5eawlCNSltT5REZvV6o3/preview"  
-    width="640" 
-    height="480" 
-    allow="autoplay"
-    controls>
-  </iframe>
+    <div id="video-container">
+      <iframe 
+        id="videoIframe"
+        src="https://drive.google.com/file/d/1MwgZCSqnh3bf5eawlCNSltT5REZvV6o3/preview"  
+        allow="autoplay"
+        allowfullscreen
+        title="Farewell 2025 Video"
+      ></iframe>
+      <button id="fullscreenBtn">Fullscreen</button>
+    </div>
 
-  <a href="explore.html">Don't Click</a>
-
-</div>
-
-
+    <a href="explore.html">Don't Click</a>
+  </div>
 
   <script src="script.js"></script>
-</body>
-</html>
+
+  <script>
+    // Fullscreen toggle script
+    const iframeContainer = document.getElementById('video-container');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+    fullscreenBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        iframeContainer.requestFullscreen().catch(err => {
+alert(`Error attempting to enable fullscreen: ${err.message} ${err.name}`)})
+        }
+else {
+document.exitFullscreen();
+}
+});
+document.addEventListener('fullscreenchange', () => {
+  if (document.fullscreenElement) {
+    fullscreenBtn.textContent = 'Exit Fullscreen';
+  } else {
+    fullscreenBtn.textContent = 'Fullscreen';
+  }
+});
+</script> </body> </html>
