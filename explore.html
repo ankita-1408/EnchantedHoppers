@@ -15,7 +15,14 @@
       justify-content: center;
       font-family: 'VT323', monospace;
     }
-
+    .glow-text {
+      color: red;
+      font-size: 24px;
+      text-align: center;
+      margin-top: 50px;
+      text-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px darkred, 0 0 30px crimson;
+      font-family: 'Arial', sans-serif;
+    }
     .clock {
       position: relative;
       width: 80vmin;
@@ -81,7 +88,9 @@
   <div class="hand second" id="second"></div>
   <div class="center"></div>
 </div>
-
+<div class="glow-text">
+    Curse has began, wait for new mystery... Guardians you have to break the Curse
+</div>
 <script>
   const hourHand = document.getElementById("hour");
   const minuteHand = document.getElementById("minute");
