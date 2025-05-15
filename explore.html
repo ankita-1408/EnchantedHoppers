@@ -3,54 +3,107 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Clock Ticks...</title>
+  <title>Horror Clock</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background: url('second background.avif') no-repeat center center fixed;
-      background-size: cover;
+      background: black;
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      overflow: hidden;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'VT323', monospace;
     }
 
     .clock {
-      font-size: 3rem;
-      color: #ff4d4d;
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 30px 60px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px #ff1a1a;
-      animation: glow 1.5s infinite ease-in-out;
+      position: relative;
+      width: 80vmin;
+      height: 80vmin;
+      border: 10px solid red;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, #000 70%, #1a0000);
+      box-shadow: 0 0 30px red;
     }
 
-    @keyframes glow {
-      0%, 100% {
-        text-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d;
-      }
-      50% {
-        text-shadow: 0 0 20px #ff1a1a, 0 0 30px #ff1a1a;
-      }
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 14px;
+      height: 14px;
+      background: red;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 10px red;
+      z-index: 10;
+    }
+
+    .hand {
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      transform-origin: bottom center;
+      transform: translate(-50%, 0%) rotate(0deg);
+      border-radius: 4px;
+    }
+
+    .hour {
+      width: 4%;
+      height: 25%;
+      background: crimson;
+      z-index: 3;
+      box-shadow: 0 0 6px crimson;
+    }
+
+    .minute {
+      width: 2.5%;
+      height: 35%;
+      background: darkred;
+      z-index: 2;
+      box-shadow: 0 0 6px darkred;
+    }
+
+    .second {
+      width: 1.5%;
+      height: 42%;
+      background: red;
+      z-index: 1;
+      box-shadow: 0 0 8px red;
     }
   </style>
 </head>
 <body>
-  <div class="clock" id="clock">00:00:00</div>
 
-  <script>
-    function updateClock() {
-      const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const seconds = String(now.getSeconds()).padStart(2, '0');
-      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
-    }
-    setInterval(updateClock, 1000);
-    updateClock(); // Initial call
-  </script>
+<div class="clock">
+  <div class="hand hour" id="hour"></div>
+  <div class="hand minute" id="minute"></div>
+  <div class="hand second" id="second"></div>
+  <div class="center"></div>
+</div>
+
+<script>
+  const hourHand = document.getElementById("hour");
+  const minuteHand = document.getElementById("minute");
+  const secondHand = document.getElementById("second");
+
+  function updateClock() {
+    const now = new Date();
+    const h = now.getHours() % 12;
+    const m = now.getMinutes();
+    const s = now.getSeconds();
+
+    const hourDeg = (h + m / 60) * 30;
+    const minDeg = (m + s / 60) * 6;
+    const secDeg = s * 6;
+
+    hourHand.style.transform = `translate(-50%, 0%) rotate(${hourDeg}deg)`;
+    minuteHand.style.transform = `translate(-50%, 0%) rotate(${minDeg}deg)`;
+    secondHand.style.transform = `translate(-50%, 0%) rotate(${secDeg}deg)`;
+  }
+
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
 </body>
 </html>
