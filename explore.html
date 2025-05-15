@@ -15,14 +15,21 @@
       justify-content: center;
       font-family: 'VT323', monospace;
     }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .glow-text {
       color: red;
-      font-size: 24px;
+      font-size: 28px;
       text-align: center;
-      margin-top: 50px;
+      margin-top: 30px;
       text-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px darkred, 0 0 30px crimson;
-      font-family: 'Arial', sans-serif;
     }
+
     .clock {
       position: relative;
       width: 80vmin;
@@ -81,40 +88,41 @@
   </style>
 </head>
 <body>
-
-<div class="clock">
-  <div class="hand hour" id="hour"></div>
-  <div class="hand minute" id="minute"></div>
-  <div class="hand second" id="second"></div>
-  <div class="center"></div>
-</div>
-<script>
-  const hourHand = document.getElementById("hour");
-  const minuteHand = document.getElementById("minute");
-  const secondHand = document.getElementById("second");
-
-  function updateClock() {
-    const now = new Date();
-    const h = now.getHours() % 12;
-    const m = now.getMinutes();
-    const s = now.getSeconds();
-
-    const hourDeg = (h + m / 60) * 30;
-    const minDeg = (m + s / 60) * 6;
-    const secDeg = s * 6;
-
-    hourHand.style.transform = `translate(-50%, 0%) rotate(${hourDeg}deg)`;
-    minuteHand.style.transform = `translate(-50%, 0%) rotate(${minDeg}deg)`;
-    secondHand.style.transform = `translate(-50%, 0%) rotate(${secDeg}deg)`;
-  }
-
-  setInterval(updateClock, 1000);
-  updateClock();
-</script>
-</body>
-  <body>
-  <div class="glow-text">
-    Curse has began, wait for new mystery... Guardians you have to break the Curse
+  <div class="container">
+    <div class="clock">
+      <div class="hand hour" id="hour"></div>
+      <div class="hand minute" id="minute"></div>
+      <div class="hand second" id="second"></div>
+      <div class="center"></div>
+    </div>
+    <div class="glow-text">
+      Curse has began, wait for new mystery...<br>
+      Guardians you have to break the Curse
+    </div>
   </div>
-  </body>
+
+  <script>
+    const hourHand = document.getElementById("hour");
+    const minuteHand = document.getElementById("minute");
+    const secondHand = document.getElementById("second");
+
+    function updateClock() {
+      const now = new Date();
+      const h = now.getHours() % 12;
+      const m = now.getMinutes();
+      const s = now.getSeconds();
+
+      const hourDeg = (h + m / 60) * 30;
+      const minDeg = (m + s / 60) * 6;
+      const secDeg = s * 6;
+
+      hourHand.style.transform = `translate(-50%, 0%) rotate(${hourDeg}deg)`;
+      minuteHand.style.transform = `translate(-50%, 0%) rotate(${minDeg}deg)`;
+      secondHand.style.transform = `translate(-50%, 0%) rotate(${secDeg}deg)`;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
 </html>
