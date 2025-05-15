@@ -85,6 +85,23 @@
       z-index: 1;
       box-shadow: 0 0 8px red;
     }
+
+    .curse-button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: darkred;
+      color: white;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      font-family: 'VT323', monospace;
+      box-shadow: 0 0 10px red;
+      transition: background 0.3s;
+    }
+
+    .curse-button:hover {
+      background-color: crimson;
+    }
   </style>
 </head>
 <body>
@@ -99,6 +116,7 @@
       Curse has begun, wait for the new mystery...<br>
       Guardians you have to break the Curse...
     </div>
+    <button class="curse-button" onclick="window.location.href='curse-video.html'">Enter the Curse Realm</button>
   </div>
 
   <script>
